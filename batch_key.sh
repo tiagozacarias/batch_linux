@@ -65,9 +65,9 @@ func_exec_all_cisco () {
      then
 
 	 echo "$msg_arq"
-    	 read file_tclect
+    	 read file_cisco_all
          for c_all in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_ALL_CISCO/,/END_ALL_CISCO/p' | egrep -v  '^([[:space:]]*$|BEGIN|END)');    
-	 do sed s/HOST/${c_all}/ ${file_tclect}  > ${c_all}.tcl ; chmod 700 ./${c_all}.tcl ; ./${c_all}.tcl >> strace.txt ; rm -rf ${c_all}.exp
+	 do sed s/HOST/${c_all}/ ${file_cisco_all}  > ${c_all}.tcl ; chmod 700 ./${c_all}.tcl ; ./${c_all}.tcl >> strace.txt ; rm -rf ${c_all}.exp
 	 done
 
      else
