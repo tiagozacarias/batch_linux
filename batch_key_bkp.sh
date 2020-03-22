@@ -29,8 +29,6 @@ if test "${chave_cisco_bkp}" = "1"
 
      echo "INICIANDO BATCH BKP CISCO | ${dia}-${mes}-${ano}"
 
-     # Equipamentos Cisco Wireless Controllers
-
      test -d $HOME/backups/cisco/wlc-5808 || mkdir -p $HOME/backups/cisco/wlc-5808
 
      for var_cwlc_5808 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_CWLC/,/END_CWLC/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -43,8 +41,6 @@ if test "${chave_cisco_bkp}" = "1"
 
 done
 
-
-# Equipamentos Cisco 2501
 test -d $HOME/backups/cisco/2501 || mkdir -p $HOME/backups/cisco/2501
 
 
@@ -59,7 +55,6 @@ test -d $HOME/backups/cisco/2501 || mkdir -p $HOME/backups/cisco/2501
 done
 
 
-# Equipamentos Cisco 2520
 test -d $HOME/backups/cisco/2520 || mkdir -p $HOME/backups/cisco/2520
 
      for var_c2520 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C2520/,/END_C2520/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -72,8 +67,6 @@ test -d $HOME/backups/cisco/2520 || mkdir -p $HOME/backups/cisco/2520
 
 done
 
-
-# Equipamentos Cisco 2960
 test -d $HOME/backups/cisco/2960 || mkdir -p $HOME/backups/cisco/2960
 
      for var_c2960 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C2960/,/END_C2960/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -86,7 +79,6 @@ test -d $HOME/backups/cisco/2960 || mkdir -p $HOME/backups/cisco/2960
 
 done
 
-# Equipamentos Cisco 2801
 test -d $HOME/backups/cisco/2801 || mkdir -p $HOME/backups/cisco/2801
 
      for var_c2801 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C2801/,/END_2801/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -99,7 +91,6 @@ test -d $HOME/backups/cisco/2801 || mkdir -p $HOME/backups/cisco/2801
 
 done
 
-# Equipamentos Cisco 1120
 test -d $HOME/backups/cisco/1120 || mkdir -p $HOME/backups/cisco/1120
 
      for var_c1120 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C1120/,/END_C1120/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -112,7 +103,6 @@ test -d $HOME/backups/cisco/1120 || mkdir -p $HOME/backups/cisco/1120
 
 done
 
-# Equipamentos Cisco 1760
 test -d $HOME/backups/cisco/1760 || mkdir -p $HOME/backups/cisco/1760
 
      for var_c1760 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C1760/,/END_C1760/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -125,7 +115,6 @@ test -d $HOME/backups/cisco/1760 || mkdir -p $HOME/backups/cisco/1760
 
 done
 
-# Equipamentos Cisco 1941
 test -d $HOME/backups/cisco/1941 || mkdir -p $HOME/backups/cisco/1941
 
      for var_c1941 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C1941/,/END_C1941/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -138,7 +127,6 @@ test -d $HOME/backups/cisco/1941 || mkdir -p $HOME/backups/cisco/1941
 
 done
   
-# Equipamentos Cisco 2511
 test -d $HOME/backups/cisco/2511 || mkdir -p $HOME/backups/cisco/2511
 
      for var_c2511 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C2511/,/END_C2511/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -151,8 +139,6 @@ test -d $HOME/backups/cisco/2511 || mkdir -p $HOME/backups/cisco/2511
 
 done
  
-
-# Equipamentos Cisco 2621
 test -d $HOME/backups/cisco/2621 || mkdir -p $HOME/backups/cisco/2621
 
      for var_c2621 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C2621/,/END_C2621/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -165,7 +151,6 @@ test -d $HOME/backups/cisco/2621 || mkdir -p $HOME/backups/cisco/2621
 
 done
 
-# Equipamentos Cisco 2811VE
 test -d $HOME/backups/cisco/2811VE || mkdir -p $HOME/backups/cisco/2811VE
 
      for var_c2811VE in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C2811VE/,/END_C2811VE/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -179,7 +164,6 @@ test -d $HOME/backups/cisco/2811VE || mkdir -p $HOME/backups/cisco/2811VE
 done
 
 
-# Equipamentos Cisco 2821
  test -d $HOME/backups/cisco/2821 || mkdir -p $HOME/backups/cisco/2821
 
       for var_c2821 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C2821/,/END_C2821/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -192,8 +176,6 @@ done
 
 done
 
-
-# Equipamentos Cisco 2921
 test -d $HOME/backups/cisco/2921 || mkdir -p $HOME/backups/cisco/2921
 
       for var_c2921 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C2921/,/END_C2921/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -206,7 +188,6 @@ test -d $HOME/backups/cisco/2921 || mkdir -p $HOME/backups/cisco/2921
 
 done
     
-# Equipamentos Cisco 2924
 test -d $HOME/backups/cisco/2924 || mkdir -p $HOME/backups/cisco/2924
 
      for var_c2924 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C2924/,/END_C2924/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -219,7 +200,6 @@ test -d $HOME/backups/cisco/2924 || mkdir -p $HOME/backups/cisco/2924
 
 done
     
-# Equipamentos Cisco 2950
 test -d $HOME/backups/cisco/2950 || mkdir -p $HOME/backups/cisco/2950
 
      for var_c2950 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C2950/,/END_C2950/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -232,8 +212,6 @@ test -d $HOME/backups/cisco/2950 || mkdir -p $HOME/backups/cisco/2950
 
 done
 
-    
-# Equipamentos Cisco 3560
 test -d $HOME/backups/cisco/3560 || mkdir -p $HOME/backups/cisco/3560
 
      for var_c3560 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C3560/,/END_C3560/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -247,7 +225,6 @@ test -d $HOME/backups/cisco/3560 || mkdir -p $HOME/backups/cisco/3560
 done
     
     
-# Equipamentos Cisco 3662
 test -d $HOME/backups/cisco/3662 || mkdir -p $HOME/backups/cisco/3662
 
      for var_c3662 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C3662/,/END_C3662/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -260,7 +237,6 @@ test -d $HOME/backups/cisco/3662 || mkdir -p $HOME/backups/cisco/3662
 
 done  
     
-# Equipamentos Cisco 3750
  test -d $HOME/backups/cisco/3750 || mkdir -p $HOME/backups/cisco/3750
 
      for var_c3750 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C3750/,/END_C3750/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -273,7 +249,6 @@ done
 
 done
         
-# Equipamentos Cisco 3850
 test -d $HOME/backups/cisco/3850 || mkdir -p $HOME/backups/cisco/3850
 
      for var_c3850 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C3850/,/END_C3850/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -286,7 +261,6 @@ test -d $HOME/backups/cisco/3850 || mkdir -p $HOME/backups/cisco/3850
 
 done
     
-# Equipamentos Cisco 3945
 test -d $HOME/backups/cisco/3945 || mkdir -p $HOME/backups/cisco/3945
 
      for var_c3945 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C3945/,/END_C3945/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -299,7 +273,6 @@ test -d $HOME/backups/cisco/3945 || mkdir -p $HOME/backups/cisco/3945
 
 done
     
-# Equipamentos Cisco 4321
 test -d $HOME/backups/cisco/4321 || mkdir -p $HOME/backups/cisco/4321
 
      for var_c4321 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C4321/,/END_C4321/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -312,7 +285,6 @@ test -d $HOME/backups/cisco/4321 || mkdir -p $HOME/backups/cisco/4321
 
 done
     
-# Equipamentos Cisco 4331
 test -d $HOME/backups/cisco/4331 || mkdir -p $HOME/backups/cisco/4331
 
      for var_c4331 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C4331/,/END_C4331/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -325,7 +297,6 @@ test -d $HOME/backups/cisco/4331 || mkdir -p $HOME/backups/cisco/4331
 
 done
     
-# Equipamentos Cisco 4503
 test -d $HOME/backups/cisco/4503 || mkdir -p $HOME/backups/cisco/4503
 
      for var_c4503 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C4503/,/END_C4503/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -338,7 +309,6 @@ test -d $HOME/backups/cisco/4503 || mkdir -p $HOME/backups/cisco/4503
 
 done
     
-# Equipamentos Cisco 4506
 test -d $HOME/backups/cisco/4506 || mkdir -p $HOME/backups/cisco/4506
 
      for var_c4506 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C4506/,/END_C4506/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -351,7 +321,6 @@ test -d $HOME/backups/cisco/4506 || mkdir -p $HOME/backups/cisco/4506
 
 done
     
-# Equipamentos Cisco 4507
 test -d $HOME/backups/cisco/4507 || mkdir -p $HOME/backups/cisco/4507
 
      for var_c4507 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C4507/,/END_C4507/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -364,7 +333,6 @@ test -d $HOME/backups/cisco/4507 || mkdir -p $HOME/backups/cisco/4507
 
 done
     
-# Equipamentos Cisco 6509
 test -d $HOME/backups/cisco/6509 || mkdir -p $HOME/backups/cisco/6509
 
      for var_c6509 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C6509/,/END_C6509/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -377,7 +345,6 @@ test -d $HOME/backups/cisco/6509 || mkdir -p $HOME/backups/cisco/6509
 
 done
     
-# Equipamentos Cisco 6513
 test -d $HOME/backups/cisco/6513 || mkdir -p $HOME/backups/cisco/6513
 
      for var_c6513 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C6513/,/END_C6513/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -391,7 +358,6 @@ test -d $HOME/backups/cisco/6513 || mkdir -p $HOME/backups/cisco/6513
 done
     
     
-# Equipamentos Cisco asr-1002
 test -d $HOME/backups/cisco/asr-1002 || mkdir -p $HOME/backups/cisco/asr-1002
 
      for var_casr1002 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_CASR1002/,/END_CASR1002/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -405,7 +371,6 @@ test -d $HOME/backups/cisco/asr-1002 || mkdir -p $HOME/backups/cisco/asr-1002
 done
     
     
-# Equipamentos Cisco asr-1006
 test -d $HOME/backups/cisco/asr-1006 || mkdir -p $HOME/backups/cisco/asr-1006
 
      for var_casr1006 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_CASR1006/,/END_CASR1006/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -419,7 +384,6 @@ test -d $HOME/backups/cisco/asr-1006 || mkdir -p $HOME/backups/cisco/asr-1006
 done
       
     
-# Equipamentos Cisco asr-903
 test -d $HOME/backups/cisco/asr-903 || mkdir -p $HOME/backups/cisco/asr-903
 
      for var_casr903 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_CASR903/,/END_CASR903/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -432,7 +396,6 @@ test -d $HOME/backups/cisco/asr-903 || mkdir -p $HOME/backups/cisco/asr-903
 
 done
         
-# Equipamentos Cisco cgr-2010
 test -d $HOME/backups/cisco/cgr-2010 || mkdir -p $HOME/backups/cisco/cgr-2010
 
      for var_ccgr2010 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_CCGR2010/,/END_CCGR2010/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -446,7 +409,6 @@ test -d $HOME/backups/cisco/cgr-2010 || mkdir -p $HOME/backups/cisco/cgr-2010
 done
     
     
-# Equipamentos Cisco cgs-2520
 test -d $HOME/backups/cisco/cgs-2520 || mkdir -p $HOME/backups/cisco/cgs-2520
 
      for var_ccgs2520 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_CCGS2520/,/END_CCGS2520/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -459,7 +421,6 @@ test -d $HOME/backups/cisco/cgs-2520 || mkdir -p $HOME/backups/cisco/cgs-2520
 
 done
 
-# Equipamentos Cisco grwic
 test -d $HOME/backups/cisco/grwic || mkdir -p $HOME/backups/cisco/grwic
 
      for var_cgrwic in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_CGRWIC/,/END_CGRWIC/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -472,7 +433,6 @@ test -d $HOME/backups/cisco/grwic || mkdir -p $HOME/backups/cisco/grwic
 
 done
 
-# Equipamentos Cisco IE-3000
 test -d $HOME/backups/cisco/IE-3000 || mkdir -p $HOME/backups/cisco/IE-3000
 
      for var_cIE3000 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_CIE3000/,/END_CIE3000/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -486,7 +446,6 @@ test -d $HOME/backups/cisco/IE-3000 || mkdir -p $HOME/backups/cisco/IE-3000
 done
 
 
-# Equipamentos Cisco MC3810
 test -d $HOME/backups/cisco/MC3810 || mkdir -p $HOME/backups/cisco/MC3810
 
      for var_cMC3810 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_CMC3810/,/END_CMC3810/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -501,7 +460,6 @@ done
 
 
 
-# Equipamentos Cisco nexus
 test -d $HOME/backups/cisco/nexus || mkdir -p $HOME/backups/cisco/nexus
 
      for var_cnexus in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_CNEXUS/,/END_CNEXUS/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -515,7 +473,6 @@ test -d $HOME/backups/cisco/nexus || mkdir -p $HOME/backups/cisco/nexus
 done
 
 
-# Equipamentos Cisco sf300
 test -d $HOME/backups/cisco/sf300 || mkdir -p $HOME/backups/cisco/sf300
 
      for var_csf300 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_CSF300/,/END_CSF300/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -545,7 +502,6 @@ if test "${chave_datacom_bkp}" = "1"
 
                 echo "INICIANDO BATCH BKP DATACOM | ${dia}-${mes}-${ano}"
                 
-# Equipamentos Datacom dm1200e
 test -d $HOME/backups/datacom/dm1200e || mkdir -p $HOME/backups/datacom/dm1200e
 
      for var_dm1200e in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_DM1200E/,/END_DM1200E/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -576,7 +532,6 @@ if test "${chave_dlink_bkp}" = "1"
 	
                 echo "INICIANDO BATCH BKP DLINK | ${dia}-${mes}-${ano}"
                 
-# Equipamentos Dlink dgs1510
 test -d $HOME/backups/dlink/dgs1510 || mkdir -p $HOME/backups/dlink/dgs1510
 
      for var_dgs1510 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_DGS1510/,/END_DGS1510/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
@@ -607,7 +562,6 @@ if test "${chave_extreme_bkp}" = "1"
 
                 echo "INICIANDO BATCH BKP EXTREME | ${dia}-${mes}-${ano}"
 
-# Equipamento Extreme Summit 440
 test -d $HOME/backups/extreme/summit-x440 || mkdir -p $HOME/backups/extreme/summit-x440
 
      for var_summit_x440 in $(cat /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_SUMMIT-X440/,/END_SUMMIT-X440/p' | egrep -v '^([[:space:]]*$|BEGIN|END)');
