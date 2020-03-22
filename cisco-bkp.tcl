@@ -1,6 +1,6 @@
 #!/usr/bin/env  expect
 # Autor: Tiago Eduardo Zacarias
-# Version 1.2
+# Versão 1.2.1
 
 # Variaveis
 set username "[exec echo $::env(USERNAME_EXP)]"
