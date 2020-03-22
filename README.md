@@ -72,27 +72,23 @@ The structure of the hosts file is defined in a way that allows the tool to limi
 
 		Installation via Snap:
 
-
 			# snap install expect
 	
-		Installation on RedHat and derivative systems:
-
+		Installation on RedHat systems:
 		
 			# dnf install expect
 			# yum install expect
 		
-		Installation on Debian and derivative systems:
+		Installation on Debian systems:
 
-		
 			# apt install expect
 		
 		Installation on FreeBSD systems:
 
-		
 			# pkg install expect
 
  
-# Comments
+# Comment
 
 
 * Before executing these tools make sure that the desired impact on the network infrastructure has been mapped, perform with caution.
