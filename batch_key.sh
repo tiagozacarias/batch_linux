@@ -3,7 +3,7 @@
 # Versão: 1.2.1
 # Data: 22-03-2020
 
-# Variávei Globais
+# Variáveis Globais
 dia="$(date +%d)"
 mes="$(date +%m)"
 ano="$(date +%Y)"
