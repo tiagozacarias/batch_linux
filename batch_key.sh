@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Autor : Tiago Eduardo Zacarias
-# Versão: 1.2.1
+# Versão: 1.2.2
 # Data: 25-03-2020
 
 # Variáveis
