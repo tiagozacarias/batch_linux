@@ -12,12 +12,12 @@
 * The batch_key.sh tool can be used to perform interactive inserts on groups of hosts defined in /etc/hosts.
 
 
-			$ ./batch_key.sh exec_hosts_all
+			$ ./batch_key.sh --exec_hosts_all arquivo_lote.tcl
 
 
-You will be asked for the name of the expect batch file that should be present in the scripts directory.
+To check the options for each equipment use the tool help with -h, --help
 
-
+In the expect file we must declare the commands that will be executed on the hosts, following the example model cisco-bkp.tcl as it is in the repository.
 
 
 * The batch_key_bkp.sh tool can be used to back up settings for groups of hosts defined in /etc/hosts.

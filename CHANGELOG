@@ -1,4 +1,4 @@
 2019-11-20 (Tiago Zacarias): Change in version 1.1 | batch_key.sh and batch_key_bkp.sh | including function
 2020-02-19 (Tiago Zacarias): Change in version 1.2 | batch_key.sh and batch_key_bkp.sh | moved hosts files to /etc/hosts
 2020-03-22 (Tiago Zacarias): Change in version 1.2.1 | batch_key.sh and batch_key_bkp.sh | Restructured
-
+2020-03-25 (Tiago Zacarias): Change in version 1.2.2 | batch_key.sh | Restructured
