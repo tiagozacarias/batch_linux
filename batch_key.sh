@@ -780,7 +780,7 @@ func_exec_cisco_2960() {
   
     if [[ "$1" != "" ]];   then       	
 
-        for c2960 in $(cat < /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C2911/,/END_C2911/p' | grep -E -v '^([[:space:]]*$|BEGIN|END)');   
+        for c2960 in $(cat < /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_C2960/,/END_C2960/p' | grep -E -v '^([[:space:]]*$|BEGIN|END)');   
  	do sed s/HOST/"${c2960}"/ "${1}"  > "${c2960}".tcl ; chmod 700 ./"${c2960}".tcl ; ./"${c2960}".tcl >> strace.txt ; rm -rf "${c2960}".tcl
 	done
   else 
