@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # Autor : Tiago Eduardo Zacarias
-# Versão: 1.3.0
-# Data: 25-03-2020
+# Versão: 1.0.0
+# Data: 07-04-2020
 # Licença: GPLv3
 
 # Variáveis
 dia="$(date +%d)"
 mes="$(date +%m)"
 ano="$(date +%Y)"
-version="1.3.0"
+version="1.0.0"
 
 # Variáveis de chaves: opcões 0/1 | Desativado/Ativado
 source ./var_chave.sh
@@ -18,14 +18,107 @@ source ./var_chave.sh
 
 # Funções
 
-func_exec_all () {
+
+func_exec_inventario () {
 
  if [[ "$chave" = "1" ]] ; then
      
    if [[ "$1" != "" ]]; then
   	
   	for hosts in $(cat < /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_'"$model"'/,/END_'"$model"'/p' | grep -E -v  '^([[:space:]]*$|BEGIN|END)');    
-	do sed s/HOST/"${hosts}"/ "${1}"  > "${hosts}".tcl ; chmod 700 ./"${hosts}".tcl ; ./"${hosts}".tcl | tee -a strace.log ; rm -rf "${hosts}".tcl
+	do sed s/HOST/"${hosts}"/ "${1}"  > "${hosts}".tcl ; chmod 700 ./"${hosts}".tcl ; ./"${hosts}".tcl | tee inventario.log ;  rm -rf "${hosts}".tcl;
+	   
+	   # Componentes de Inventário
+   	   version_regex="$(cat < inventario.log | grep -E -o -m 1 "\".*\"" | grep -E -o "c.*bin")"
+   	   chassi_regex_a="$(cat < inventario.log | grep -E -o -m 1 "((CISCO|Cisco[[:space:]]|CGR-|ASR-|ASR)[0-9]{1,4}|IE-[0-9]{4}-[0-9][A-Z]{1,3})")"
+   	   chassi_regex_b="$(cat < inventario.log | grep -E -o -m 1 "(CGS-[0-9]{4}-[0-9]{1,2}[A-Z]-[0-9]{1,2}[A-Z]{1,3}|GRWIC-[A-Z]-[A-Z]{2}-[0-9][A-Z]-[0-9][A-Z]{2})")"
+	   chassi_regex_c="$(cat < inventario.log | grep -E -o -m 1 "WS-C[0-9]{4}[A-Z]?[0-9,+]?[0-9]?.[0-8]{1,2}[A-Z]{1,3}-[A-Z]")"
+	   uptime_regex="$(cat < inventario.log | grep -E -o -m 1 "uptime[[:space:]]{1}is\s{1}[0-9]{0,10}.(minutes|hour|hours|day|days|week|weeks|year|yars)")"
+   	   memory_size_total_kbytes_regex="$(cat < inventario.log | grep -E -o -m 1 "[0-9]{5,9}K" | grep -E -o -m1 "[0-9]{5,9}")"
+   	   flash_size_free_bytes_regex="$(cat < inventario.log | grep -E -o -m 5 "\([0-9]{6,}" | grep -E -o -m1 "[0-9]{6,}")"
+   	   flash_size_total_bytes_regex="$(cat < inventario.log | grep -E -o -m 1 "^[0-9]{8,}")"
+	
+	if [[ $memory_size_total_kbytes_regex = "" ]]; then
+	
+	echo -e "Host:$hosts Sistema:Sem Info Memoria Total:Sem Info Flash Total:Sem Info Flash Livre:Sem Info Chassi:Sem Info  Uptime:Sem Info"  >> ./inventario.txt
+	echo -e "#-------------------------------------------------------------------------------------------------------------------------------------------------------#" >> ./inventario.txt               >> ./inventario.txt
+	echo -e "" >> ./inventario.txt
+	
+	else
+
+		memory_size_total_Mbytes="$((memory_size_total_kbytes_regex/1024))"
+
+	fi
+
+
+	 if [[ $flash_size_free_bytes_regex = "" ]]; then
+
+        continue
+
+        else
+
+                flash_size_free_Mbytes="$((flash_size_free_bytes_regex/1024000))"
+        
+        fi      
+
+
+
+	if [[ $flash_size_total_bytes_regex = "" ]]; then
+
+	continue
+
+        else
+
+		flash_size_total_Mbytes="$((flash_size_total_bytes_regex/1024000))"
+	
+	fi	
+	
+	
+
+	if [[ "$chassi_regex_a" = "" ]]; then
+	
+	echo -e "Variável Vazia" > /dev/null 2>&1
+
+	else 
+	
+	echo -e "Host:$hosts | Sistema:$version_regex"  >> ./inventario.txt
+	echo -e "Host:$hosts | Mem Total:$memory_size_total_Mbytes"MB" | Flash Total:$flash_size_total_Mbytes"MB" Flash Livre:$flash_size_free_Mbytes"MB" Chassi:$chassi_regex_a | Uptime:$uptime_regex"  >> ./inventario.txt
+        echo -e "#-------------------------------------------------------------------------------------------------------------------------------------------------------#"  >> ./inventario.txt
+        echo -e "" >> ./inventario.txt
+
+
+	fi
+
+
+  if [[ "$chassi_regex_b" = "" ]]; then
+        
+        echo -e "Variável Vazia" > /dev/null 2>&1
+
+        else
+
+
+	echo -e "Host:$hosts | Sistema:$version_regex"  >> ./inventario.txt
+        echo -e "Host:$hosts | Mem Total:$memory_size_total_Mbytes"MB" | Flash Total:$flash_size_total_Mbytes"MB" Flash Livre:$flash_size_free_Mbytes"MB" Chassi:$chassi_regex_b | Uptime:$uptime_regex"  >> ./inventario.txt
+	echo -e "#-------------------------------------------------------------------------------------------------------------------------------------------------------#" >> ./inventario.txt
+        echo -e "" >> ./inventario.txt
+        
+
+        fi
+
+  if [[ "$chassi_regex_c" = "" ]]; then
+        
+        echo -e "Variável Vazia" > /dev/null 2>&1
+
+        else 
+
+	echo -e "Host:$hosts | Sistema:$version_regex"  >> ./inventario.txt
+        echo -e "Host:$hosts | Mem Total:$memory_size_total_Mbytes"MB" | Flash Total:$flash_size_total_Mbytes"MB" Flash Livre:$flash_size_free_Mbytes"MB" Chassi:$chassi_regex_c | Uptime:$uptime_regex"  >> ./inventario.txt
+        echo -e "#-------------------------------------------------------------------------------------------------------------------------------------------------------#" >> ./inventario.txt
+        echo -e "" >> ./inventario.txt
+        
+
+        fi
+
 	done
    
     else 
@@ -163,235 +256,274 @@ elif [[ "$1" == "--version" ]]; then
 elif [[ "$1" == "--exec_teste" ]]; then
     chave="$chave_teste"
     model="TESTE"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
     
 elif [[ "$1" == "--exec_c2501" ]]; then
     chave="$chave_cisco_2501"
     model="C2501"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
 
 elif [[ "$1" == "--exec_c2960" ]]; then
     chave="$chave_cisco_2960"
     model="C2960"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
     
 elif [[ "$1" == "--exec_dm1200e" ]]; then
     chave="$chave_datacom_dm_1200e"
     model="DM1200E"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
     
 elif [[ "$1" == "--exec_dgs-1510" ]]; then
     chave="$chave_dlink_dgs_1510"
     model="DGS1510"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
 
 elif [[ "$1" == "--exec_c1120" ]]; then
     chave="$chave_cisco_1120"
     model="C1120"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
     
 elif [[ "$1" == "--exec_c1760" ]]; then
     chave="$chave_cisco_1760"
     model="C1760"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
     
 elif [[ "$1" == "--exec_c1941" ]]; then
     chave="$chave_cisco_1941"
     model="C1941"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?    
 
 elif [[ "$1" == "--exec_c2511" ]]; then
     chave="$chave_cisco_2511"
     model="C2511"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
     
 elif [[ "$1" == "--exec_c2621" ]]; then
     chave="$chave_cisco_2621"
     model="C2621"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?    
 
 elif [[ "$1" == "--exec_c2801" ]]; then
     chave="$chave_cisco_2801"
     model="C2801"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?    
     
 elif [[ "$1" == "--exec_c2811VE" ]]; then
     chave="$chave_cisco_2811ve"
     model="C2801"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?    
     
 elif [[ "$1" == "--exec_c2821" ]]; then
     chave="$chave_cisco_2821"
     model="C2821"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?    
     
 elif [[ "$1" == "--exec_c2921" ]]; then
     chave="$chave_cisco_2921"
     model="C2921"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?    
     
 elif [[ "$1" == "--exec_c2924" ]]; then
     chave="$chave_cisco_2924"
     model="C2924"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?    
     
 elif [[ "$1" == "--exec_c2950" ]]; then
     chave="$chave_cisco_2950"
     model="C2950"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
     
 elif [[ "$1" == "--exec_c3560" ]]; then
     chave="$chave_cisco_3560"
     model="C3560"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
   
 elif [[ "$1" == "--exec_c3662" ]]; then
     chave="$chave_cisco_3662"
     model="C3662"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
 
 elif [[ "$1" == "--exec_c3750" ]]; then
     chave="$chave_cisco_3750"
     model="C3750"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
     
 elif [[ "$1" == "--exec_c3850" ]]; then
     chave="$chave_cisco_3850"
     model="C3850"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $? 
     
 elif [[ "$1" == "--exec_c3945" ]]; then
     chave="$chave_cisco_3945"
     model="C3945"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?    
     
 elif [[ "$1" == "--exec_c4321" ]]; then
     chave="$chave_cisco_4321"
     model="C4321"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?   
     
 elif [[ "$1" == "--exec_c4331" ]]; then
     chave="$chave_cisco_4331"
     model="C4331"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?    
 
 elif [[ "$1" == "--exec_c4503" ]]; then
     chave="$chave_cisco_4503"
     model="C4503"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?    
     
 elif [[ "$1" == "--exec_c4506" ]]; then
     chave="$chave_cisco_4506"
     model="C4506"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?    
 
 elif [[ "$1" == "--exec_c4507" ]]; then
     chave="$chave_cisco_4507"
     model="C4507"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?        
 
 elif [[ "$1" == "--exec_c6509" ]]; then
     chave="$chave_cisco_6509"
     model="C6509"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?      
 
 elif [[ "$1" == "--exec_c6513" ]]; then
     chave="$chave_cisco_6513"
     model="C6513"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?      
 
 elif [[ "$1" == "--exec_casr-1002" ]]; then
     chave="$chave_cisco_asr_1002"
     model="CASR1002"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?  
 
 elif [[ "$1" == "--exec_casr-1006" ]]; then
     chave="$chave_cisco_asr_1006"
     model="CASR1006"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
     
 elif [[ "$1" == "--exec_casr-903" ]]; then
     chave="$chave_cisco_asr_903"
     model="CASR903"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
 
 elif [[ "$1" == "--exec_ccgr-2010" ]]; then
     chave="$chave_cisco_cgr_2010"
     model="CCGR2010"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
     
 elif [[ "$1" == "--exec_ccgs-2520" ]]; then
     chave="$chave_cisco_cgs_2520"
     model="CCGS2520"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
 
 elif [[ "$1" == "--exec_cgrwic" ]]; then
     chave="$chave_cisco_grwic"
     model="CGRWIC"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
 
 elif [[ "$1" == "--exec_cie-3000" ]]; then
     chave="$chave_cisco_ie_3000"
     model="CIE3000"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
     
 elif [[ "$1" == "--exec_cmc4810" ]]; then
     chave="$chave_cisco_mc3810"
     model="CMC3810"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
     
 elif [[ "$1" == "--exec_cnexus" ]]; then
     chave="$chave_cisco_nexus"
     model="CNEXUS"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
 
 elif [[ "$1" == "--exec_csf300" ]]; then
     chave="$chave_cisco_sf300"
     model="CSF300"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?
     
 elif [[ "$1" == "--exec_all_cisco" ]]; then
     chave="$chave_all_cisco"
     model="ALL_CISCO"
-    func_exec_all "$2"
+    echo "" > ./inventario.txt
+    func_exec_inventario "$2"
     exit $?      
 else
     echo -e "\033[0;36m[Esta opção não é válida, verifique as opções em ajuda: -h, --help]\033[0m"

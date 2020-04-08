@@ -30,6 +30,14 @@ In the expect file we must declare the commands that will be executed on the hos
 The default backup directory and ~/backups
 
 
+* The batch_key_inventory.sh Tool can be used to obtain inventory of network equipment.
+
+
+For the time being the inventory is only supported on equipments I cisco the idea and extend it to other manufacturers.
+
+			
+			$ ./batch_key_inventory.sh --exec_c2960 cisco_inventory.tcl
+
 
 * You must include the host groups in the /etc/hosts file, following the examples below:
 
