@@ -11,7 +11,45 @@ ano="$(date +%Y)"
 version="1.3.0"
 
 # Variáveis de chaves: opcões 0/1 | Desativado/Ativado
-source ./var_chave.sh
+chave_all_cisco="1"
+chave_cisco_2501="1"
+chave_cisco_nexus="1"
+chave_cisco_mc3810="1"
+chave_cisco_ie_3000="1"
+chave_cisco_grwic="1"
+chave_cisco_cgs_2520="1"
+chave_cisco_cgr_2010="1"
+chave_cisco_asr_903="1"
+chave_cisco_asr_1006="1"
+chave_cisco_asr_1002="1"
+chave_cisco_6513="1"
+chave_cisco_6509="1"
+chave_cisco_4507="1"
+chave_cisco_1760="1"
+chave_cisco_4506="1"
+chave_cisco_4503="1"
+chave_cisco_4331="1"
+chave_cisco_4321="1"
+chave_cisco_3945="1"
+chave_cisco_3850="1"
+chave_cisco_3750="1"
+chave_cisco_3662="1"
+chave_cisco_3560="1"
+chave_cisco_2950="1"
+chave_cisco_2924="1"
+chave_cisco_2921="1"
+chave_cisco_2821="1"
+chave_cisco_2811ve="1"
+chave_cisco_2621="1"
+chave_cisco_2511="1"
+chave_cisco_2960="1"
+chave_cisco_1120="1"
+chave_cisco_2801="1"
+chave_cisco_1941="1"
+chave_datacom_dm_1200e="1"
+chave_dlink_dgs_1510="1"
+chave_cisco_sf300="1"
+chave_teste="1"
 
 #TODO
 # Pendente implementar paralelismo nos processos.
@@ -24,8 +62,8 @@ func_exec_all () {
      
    if [[ "$1" != "" ]]; then
   	
-  	for hosts in $(cat < /etc/hosts | awk '{print $2}' | sed -n '/BEGIN_'"$model"'/,/END_'"$model"'/p' | grep -E -v  '^([[:space:]]*$|BEGIN|END)');    
-	do sed s/HOST/"${hosts}"/ "${1}"  > "${hosts}".tcl ; chmod 700 ./"${hosts}".tcl ; ./"${hosts}".tcl | tee -a strace.log ; rm -rf "${hosts}".tcl
+  	for hosts in $(cat < /etc/hosts | sed -n '/BEGIN_'"$model"'/,/END_'"$model"'/p' | grep -E -v '^([[:space:]]*$|BEGIN|END|#)' |  awk '{print $2}');    
+	do sed s/HOST/"${hosts}"/ "${1}"  > "${hosts}".tcl ; chmod 700 ./"${hosts}".tcl ; ./"${hosts}".tcl | tee -a  strace.log ; rm -rf "${hosts}".tcl
 	done
    
     else 

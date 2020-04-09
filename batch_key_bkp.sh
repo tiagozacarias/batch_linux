@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 # Autor : Tiago Eduardo Zacarias
-# Versão: 1.2.2
+# Versão: 1.2.1
 # Data: 22-03-2020
-# Licença: GPLv3
 
 # Variáveis
 dia="$(date +%d)"
 mes="$(date +%m)"
 ano="$(date +%Y)"
-version="1.2.2"
+version="1.2.1"
 
 # Variáveis de chaves: opcões 0/1 | Desativado/Ativado
 chave_cisco_bkp="1"
@@ -19,6 +18,7 @@ chave_clear_bkp="1"
 
 #TODO
 # Pendente reduzir a quantidade de loops.
+# Ignorar hosts com cerquilha em /etc/hosts.
 
 # Funções
 
@@ -27,6 +27,8 @@ func_exec_cisco() {
 if test "${chave_cisco_bkp}" = "1" 
 
      then 
+
+     echo "INICIANDO BATCH BKP CISCO | ${dia}-${mes}-${ano}"
 
      test -d "$HOME"/backups/cisco/wlc-5808 || mkdir -p "$HOME"/backups/cisco/wlc-5808
 
@@ -473,7 +475,7 @@ done
 
 	else
 
-echo  "[Esta função está desativada.] | ${dia}-${mes}-${ano}" 
+echo  "BATCH CISCO BKP ESTA DESATIVADO | ${dia}-${mes}-${ano}" 
 
 fi 
 
@@ -486,6 +488,7 @@ if test "${chave_datacom_bkp}" = "1"
 
         then
 
+                echo "INICIANDO BATCH BKP DATACOM | ${dia}-${mes}-${ano}"
                 
 test -d "$HOME"/backups/datacom/dm1200e || mkdir -p "$HOME"/backups/datacom/dm1200e
 
@@ -502,7 +505,7 @@ done
 
         else
 
-echo  "[Esta função está desativada.] | ${dia}-${mes}-${ano}"
+echo  "BATCH DATACOM BKP ESTA DESATIVADO | ${dia}-${mes}-${ano}"
 
 fi
 
@@ -515,6 +518,7 @@ if test "${chave_dlink_bkp}" = "1"
 
         then
 	
+                echo "INICIANDO BATCH BKP DLINK | ${dia}-${mes}-${ano}"
                 
 test -d "$HOME"/backups/dlink/dgs1510 || mkdir -p "$HOME"/backups/dlink/dgs1510
 
@@ -531,7 +535,7 @@ done
 
         else
 
-echo  "[Esta função está desativada.] | ${dia}-${mes}-${ano}"
+echo  "BATCH DLINK BKP ESTA DESATIVADO | ${dia}-${mes}-${ano}"
 
 fi
 
@@ -544,6 +548,7 @@ if test "${chave_extreme_bkp}" = "1"
 
         then
 
+                echo "INICIANDO BATCH BKP EXTREME | ${dia}-${mes}-${ano}"
 
 test -d "$HOME"/backups/extreme/summit-x440 || mkdir -p "$HOME"/backups/extreme/summit-x440
 
@@ -559,7 +564,7 @@ done
 
 	else
 
-echo  "[Esta função está desativada.] | ${dia}-${mes}-${ano}"
+echo  "BATCH EXTREME BKP ESTA DESATIVADO | ${dia}-${mes}-${ano}"
 
 fi
 
@@ -572,13 +577,14 @@ if test "${chave_clear_bkp}" = "1"
 
         then
 
+                echo "INICIANDO BATCH DE LIMPEZA BKP | ${dia}-${mes}-${ano}"
                 
 
 find "$HOME"/backups/ -name "*.txt" -type f -mtime +30 -exec rm -rf {} \;
 
         else
 
-echo  "[Esta função está desativada.] | ${dia}-${mes}-${ano}"
+echo  "BATCH DE LIMPEZA BKP ESTA DESATIVADO | ${dia}-${mes}-${ano}"
 
 fi
 
