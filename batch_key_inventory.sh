@@ -153,7 +153,6 @@ Opções Válidas:
 	--exec_c2821      arquivo_de_lote.tcl     Executa comandos em todos os equipamentos da cisco 2821
 	--exec_c2921      arquivo_de_lote.tcl     Executa comandos em todos os equipamentos da cisco 2921 
 	--exec_c2924      arquivo_de_lote.tcl     Executa comandos em todos os equipamentos da cisco 2924 
-	
 	--exec_c2950      arquivo_de_lote.tcl     Executa comandos em todos os equipamentos da cisco 2950 
 	--exec_c3560      arquivo_de_lote.tcl     Executa comandos em todos os equipamentos da cisco 3560  
 	--exec_c3662      arquivo_de_lote.tcl     Executa comandos em todos os equipamentos da cisco 3662 
