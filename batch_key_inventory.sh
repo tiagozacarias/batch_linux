@@ -41,7 +41,7 @@ func_exec_inventario () {
 	if [[ $memory_size_total_kbytes_regex = "" ]]; then
 	
 	echo -e "Host:$hosts Sistema:Sem Info Memoria Total:Sem Info Flash Total:Sem Info Flash Livre:Sem Info Chassi:Sem Info  Uptime:Sem Info"  >> ./inventario.txt
-	echo -e "#-------------------------------------------------------------------------------------------------------------------------------------------------------#" >> ./inventario.txt               >> ./inventario.txt
+	echo -e "#-------------------------------------------------------------------------------------------------------------------------------------------------------#" >> ./inventario.txt
 	echo -e "" >> ./inventario.txt
 	
 	else
