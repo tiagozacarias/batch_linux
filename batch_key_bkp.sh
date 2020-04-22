@@ -9,7 +9,7 @@ mes="$(date +%m)"
 ano="$(date +%Y)"
 version="1.2.1"
 
-# Variáveis de chaves: opcões 0/1 | Desativado/Ativado
+# Variáveis de chaves booleanas: opcões 0/1 | Desativado/Ativado
 chave_cisco_bkp="1"
 chave_datacom_bkp="1"
 chave_dlink_bkp="1"

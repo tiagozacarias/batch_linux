@@ -1,4 +1,4 @@
-# Variáveis de chaves: opcões 0/1 | Desativado/Ativado
+# Variáveis de chaves booleanas: opcões 0/1 | Desativado/Ativado
 chave_all_cisco="1"
 chave_cisco_2501="1"
 chave_cisco_nexus="1"

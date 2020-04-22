@@ -10,7 +10,7 @@ mes="$(date +%m)"
 ano="$(date +%Y)"
 version="1.0.0"
 
-# Variáveis de chaves: opcões 0/1 | Desativado/Ativado
+# Variáveis de chaves booleanas: opcões 0/1 | Desativado/Ativado
 source ./var_chave.sh
 
 #TODO
