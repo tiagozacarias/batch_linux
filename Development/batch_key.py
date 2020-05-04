@@ -38,32 +38,32 @@ def menu_help():
 
     print("""
 
-Usage: {} [OPTION]
+        Usage: {} [OPTION]
 
-Valid Options:
+        Valid Options:
 
 
-	-V, --version     Show tool version
+	    -V, --version     Show tool version
 
-	-h, --help        Display help menu
+	    -h, --help        Display help menu
 
-	--exec_casr-1002  lot_file.tcl     Performs commands on all equipment in the cisco asr-1002
+	    --exec_casr-1002  lot_file.tcl     Performs commands on all equipment in the cisco asr-1002
 
-	--exec_casr-1006  lot_file.tcl     Performs commands on all equipment in the cisco asr-1006
+	    --exec_casr-1006  lot_file.tcl     Performs commands on all equipment in the cisco asr-1006
 
-	--exec_casr-903   lot_file.tcl     Performs commands on all equipment in the cisco asr-903
+	    --exec_casr-903   lot_file.tcl     Performs commands on all equipment in the cisco asr-903
 
-	--exec_ccgr-2010  lot_file.tcl     Performs commands on all equipment in the cisco cgr-2010
+	    --exec_ccgr-2010  lot_file.tcl     Performs commands on all equipment in the cisco cgr-2010
 
-	--exec_ccgs-2520  lot_file.tcl     Performs commands on all equipment in the cisco cgs-2520
+	    --exec_ccgs-2520  lot_file.tcl     Performs commands on all equipment in the cisco cgs-2520
 
-	--exec_cgrwic     lot_file.tcl     Performs commands on all equipment in the cisco grwic
+	    --exec_cgrwic     lot_file.tcl     Performs commands on all equipment in the cisco grwic
 
-	--exec_all_cisco  lot_file.tcl     Performs commands on all equipments cisco
+	    --exec_all_cisco  lot_file.tcl     Performs commands on all equipments cisco
 
             [*** Consult the options_exec.txt file to check the supported equipment***]
 
-""").format(sys.argv[0])
+    """).format(sys.argv[0])
 
 def func_switch():
 
