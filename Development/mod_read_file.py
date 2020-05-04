@@ -26,6 +26,6 @@ def func_iterate_redirect_file(file_in,file_out):
         for i in data:
             line_strip = i.strip()
             
-            with open(file_out, "a") as file_ou:
-                sys.stdout = file_ou
-                print("{}".format(line_strip))
+        with open(file_out, "a") as file_ou:
+            sys.stdout = file_ou
+            print("{}".format(line_strip))
