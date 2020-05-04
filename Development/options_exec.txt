@@ -1,3 +1,21 @@
+ 	
+Options for exec:
+
+
+	--exec_casr-1002  lot_file.tcl     Performs commands on all equipment in the cisco asr-1002
+
+	--exec_casr-1006  lot_file.tcl     Performs commands on all equipment in the cisco asr-1006
+
+	--exec_casr-903   lot_file.tcl     Performs commands on all equipment in the cisco asr-903
+
+	--exec_ccgr-2010  lot_file.tcl     Performs commands on all equipment in the cisco cgr-2010
+
+	--exec_ccgs-2520  lot_file.tcl     Performs commands on all equipment in the cisco cgs-2520
+
+	--exec_cgrwic     lot_file.tcl     Performs commands on all equipment in the cisco grwic
+
+	--exec_all_cisco  lot_file.tcl     Performs commands on all equipments cisco	
+
 	--exec_c2960      lot_file.tcl     Performs commands on all equipment in the cisco 2960
 
 	--exec_c1120      lot_file.tcl     Performs commands on all equipment in the cisco 1120

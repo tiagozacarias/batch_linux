@@ -9,18 +9,22 @@ import mod_vars_keys as keys
 import datetime
 import re
 import sys
-version = "1.0.0"
 
 # TODO
 # Pending to finish programming the host reading module.
 
 # Date
+
 now = datetime.datetime.now()
 day = now.strftime("%d")
 month = now.strftime("%m")
 year = now.strftime("%Y")
 
 # Functions
+
+def func_version():
+    print("version = 1.0.0")
+
 
 def func_exec_all(key, model):
 
@@ -34,7 +38,7 @@ def func_exec_all(key, model):
               .format(day, month, year))
 
 
-def menu_help():
+def func_menu_help():
 
     print("""
 
@@ -63,21 +67,22 @@ def menu_help():
 
             [*** Consult the options_exec.txt file to check the supported equipment***]
 
-    """).format(sys.argv[0])
+""".format(sys.argv[0]))
+
 
 def func_switch():
 
     if sys.argv[1] == "-h":
-        menu_help()
+        func_menu_help()
 
     elif sys.argv[1] == "--help":
-        menu_help()
+        func_menu_help()
 
     elif sys.argv[1] == "-V":
-        print("Version: {}").format(version)
+        func_version()
 
     elif sys.argv[1] == "--version":
-        print("Version: {}").format(version)
+        func_version()
 
     elif sys.argv[1] == "--exec_c2960":
         key = keys.chave_cisco_2960
@@ -272,15 +277,17 @@ def func_switch():
         print("\033[0;31m[You must pass a valid argument | {}-{}-{}]\033[0m"
               .format(day, month, year))
 
+
 # Exec Switch
 if __name__ == "__main__":
 
     if len(sys.argv) == 1:
-        menu_help()
+        func_menu_help()
 
     elif len(sys.argv) > 3:
         print(
-            "\033[0;31m[Invalid number of arguments | {}-{}-{} ]\033[0m".format(day, month, year))
+            "\033[0;31m[Invalid number of arguments | {}-{}-{} ]\033[0m"
+            .format(day, month, year))
 
     else:
         func_switch()
