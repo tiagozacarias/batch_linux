@@ -1,1 +1,4 @@
 *.log
+*.txt
+Development/*.pyc
+Development/__pycache__
