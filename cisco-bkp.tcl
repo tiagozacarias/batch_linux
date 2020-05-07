@@ -6,6 +6,7 @@
 set username "[exec echo $::env(USERNAME_EXP)]"
 set password "[exec echo $::env(PASSWORD_EXP)]"
 set hostname "HOST"
+set timeout 1000
 
 spawn telnet $hostname
 
