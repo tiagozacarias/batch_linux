@@ -1,4 +1,6 @@
 *.log
 *.txt
 Development/*.pyc
+Development/modules/*.pyc
 Development/__pycache__
+Development/modules/__pycache__
