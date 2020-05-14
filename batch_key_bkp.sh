@@ -18,7 +18,6 @@ chave_clear_bkp="1"
 
 #TODO
 # Pendente reduzir a quantidade de loops.
-# Ignorar hosts com cerquilha em /etc/hosts.
 
 # Funções
 
