@@ -25,103 +25,31 @@ func_exec_inventario () {
      
    if [[ "$1" != "" ]]; then
   	
+	test -d tmp || mkdir -p tmp	
   	for hosts in $(cat < /etc/hosts | sed -n '/BEGIN_'"$model"'/,/END_'"$model"'/p' | grep -E -v '^([[:space:]]*$|BEGIN|END|#)' |  awk '{print $2}');    
-	do sed s/HOST/"${hosts}"/ "${1}"  > "${hosts}".tcl ; chmod 700 ./"${hosts}".tcl ; ./"${hosts}".tcl | tee inventory.log  ; rm -rf "${hosts}".tcl; 
+	do sed s/HOST/"${hosts}"/ "${1}"  > tmp/"${hosts}".tcl ; chmod 700 tmp/"${hosts}".tcl ; tmp/"${hosts}".tcl | tee inventory.log  ; rm -rf tmp/"${hosts}".tcl; 
 	sed -i -e 's/\r//g' inventory.log;
 	   
 	   # Componentes de Inventário
    	   version_regex="$(cat < inventory.log | grep -E -o -m 1 "\".*\"" | grep -E -o "(c|g|i).*bin")"
-   	   chassi_regex_a="$(cat < inventory.log | grep -E -o -m 1 "((CISCO|Cisco[[:space:]]|CGR-|ASR-|ASR)[0-9]{1,4}|IE-[0-9]{4}-[0-9][A-Z]{1,3})")"
-   	   chassi_regex_b="$(cat < inventory.log | grep -E -o -m 1 "(CGS-[0-9]{4}-[0-9]{1,2}[A-Z]-[0-9]{1,2}[A-Z]{1,3}|GRWIC-[A-Z]-[A-Z]{2}-[0-9][A-Z](-[0-9][A-Z]{2})?)")"
-	   chassi_regex_c="$(cat < inventory.log | grep -E -o -m 1 "WS-C[0-9]{4}[A-Z]?[0-9,+]?[0-9]?.[0-8]{1,2}[A-Z]{1,3}-[A-Z]")"
+   	   chassi_regex="$(cat < inventory.log | grep -E -o -m 1 "(((CISCO|Cisco[[:space:]]|CGR-|ASR-|ASR)[0-9]{1,4}|IE-[0-9]{4}-[0-9][A-Z]{1,3})|(CGS-[0-9]{4}-[0-9]{1,2}[A-Z]-[0-9]{1,2}[A-Z]{1,3}|GRWIC-[A-Z]-[A-Z]{2}-[0-9][A-Z](-[0-9][A-Z]{2})?)|WS-C[0-9]{4}[A-Z]?[0-9,+]?[0-9]?.[0-8]{1,2}[A-Z]{1,3}-[A-Z])")"
 	   hostname_regex="$(cat < inventory.log | grep -E -o "^hostname.*" | grep -E -o -m 1 "[[:space:]].*" | sed 's/^ *//g')"
 	   uptime_regex="$(cat < inventory.log | grep -E -o -m 1 "uptime[[:space:]]{1}is\s{1}[0-9]{0,10}.(minutes|hour|hours|day|days|week|weeks|year|yars)")"
    	   memory_size_total_kbytes_regex="$(cat < inventory.log | grep -E -o -m 1 "[0-9]{5,9}K" | grep -E -o -m1 "[0-9]{5,9}")"
    	   flash_size_free_bytes_regex="$(cat < inventory.log | grep -E -o -m 5 "\([0-9]{6,}" | grep -E -o -m1 "[0-9]{6,}")"
    	   flash_size_total_bytes_regex="$(cat < inventory.log | grep -E -o -m 1 "^[0-9]{8,}")"
-	
-	
-if [[ $memory_size_total_kbytes_regex = "" ]]; then
-	
-	echo -e "Host:$hosts Sistema:Sem Info Memoria Total:Sem Info Flash Total:Sem Info Flash Livre:Sem Info Chassi:Sem Info  Uptime:Sem Info"  >> ./inventario.txt
-	echo -e "#-------------------------------------------------------------------------------------------------------------------------------------------------------#" >> ./inventario.txt
-	echo -e "" >> ./inventario.txt
-	
-	else
-
-		memory_size_total_Mbytes="$((memory_size_total_kbytes_regex/1024))"
-
-	fi
-
-
-	 if [[ $flash_size_free_bytes_regex = "" ]]; then
-
-        continue
-
-        else
-
-                flash_size_free_Mbytes="$((flash_size_free_bytes_regex/1024000))"
-        
-        fi      
-
-
-
-	if [[ $flash_size_total_bytes_regex = "" ]]; then
-
-	continue
-
-        else
-
-		flash_size_total_Mbytes="$((flash_size_total_bytes_regex/1024000))"
-	
-	fi	
-	
-	
-
-	if [[ "$chassi_regex_a" = "" ]]; then
-	
-	echo "Variavel Vazia" > /dev/null
-
-	else 
+	   memory_size_total_Mbytes="$((memory_size_total_kbytes_regex/1024))"
+	   flash_size_free_Mbytes="$((flash_size_free_bytes_regex/1024000))"
+	   flash_size_total_Mbytes="$((flash_size_total_bytes_regex/1024000))"
+		
 
 	
 	echo -e "Host:$hostname_regex | Sistema:$version_regex"  >> ./inventario.txt
-	echo -e "Host:$hostname_regex | Mem Total:$memory_size_total_Mbytes"MB" | Flash Total:$flash_size_total_Mbytes"MB" Flash Livre:$flash_size_free_Mbytes"MB" Chassi:$chassi_regex_a | Uptime:$uptime_regex"  >> ./inventario.txt
+	echo -e "Host:$hostname_regex | Mem Total:$memory_size_total_Mbytes"MB" | Flash Total:$flash_size_total_Mbytes"MB" Flash Livre:$flash_size_free_Mbytes"MB" Chassi:$chassi_regex | Uptime:$uptime_regex"  >> ./inventario.txt
         echo -e "#-------------------------------------------------------------------------------------------------------------------------------------------------------#"  >> ./inventario.txt
         echo -e "" >> ./inventario.txt
 
 
-	fi
-
-
-  if [[ "$chassi_regex_b" = "" ]]; then
-        
-	echo "Variavel Vazia" > /dev/null
-
-        else
-
-
-	echo -e "Host:$hostname_regex | Sistema:$version_regex"  >> ./inventario.txt
-        echo -e "Host:$hostname_regex | Mem Total:$memory_size_total_Mbytes"MB" | Flash Total:$flash_size_total_Mbytes"MB" Flash Livre:$flash_size_free_Mbytes"MB" Chassi:$chassi_regex_b | Uptime:$uptime_regex"  >> ./inventario.txt
-	echo -e "#-------------------------------------------------------------------------------------------------------------------------------------------------------#" >> ./inventario.txt
-        echo -e "" >> ./inventario.txt
-        
-
-        fi
-
-  if [[ "$chassi_regex_c" = "" ]]; then
-	
-       	echo "Variavel Vazia" > /dev/null
-
-        else 
-
-	echo -e "Host:$hostname_regex | Sistema:$version_regex"  >> ./inventario.txt
-        echo -e "Host:$hostname_regex | Mem Total:$memory_size_total_Mbytes"MB" | Flash Total:$flash_size_total_Mbytes"MB" Flash Livre:$flash_size_free_Mbytes"MB" Chassi:$chassi_regex_c | Uptime:$uptime_regex"  >> ./inventario.txt
-        echo -e "#-------------------------------------------------------------------------------------------------------------------------------------------------------#" >> ./inventario.txt
-        echo -e "" >> ./inventario.txt
-        
-
-        fi
 
 	done
    

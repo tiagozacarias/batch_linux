@@ -10,7 +10,7 @@ mes="$(date +%m)"
 ano="$(date +%Y)"
 version="1.3.0"
 
-# Variáveis de chaves booleanas: opcões 0/1 | Desativado/Ativado
+# Variáveis de chaves: opcões 0/1 | Desativado/Ativado
 source ./var_chave.sh
 
 #TODO
@@ -23,9 +23,10 @@ func_exec_all () {
  if [[ "$chave" = "1" ]] ; then
      
    if [[ "$1" != "" ]]; then
-  	
+	
+  	test -d tmp || mkdir -p tmp
   	for hosts in $(cat < /etc/hosts | sed -n '/BEGIN_'"$model"'/,/END_'"$model"'/p' | grep -E -v '^([[:space:]]*$|BEGIN|END|#)' |  awk '{print $2}');    
-	do sed s/HOST/"${hosts}"/ "${1}"  > "${hosts}".tcl ; chmod 700 ./"${hosts}".tcl ; ./"${hosts}".tcl | tee -a  strace.log ; rm -rf "${hosts}".tcl
+	do sed s/HOST/"${hosts}"/ "${1}"  > tmp/"${hosts}".tcl ; chmod 700 tmp/"${hosts}".tcl ; tmp/"${hosts}".tcl | tee -a  strace.log ; rm -rf tmp/"${hosts}".tcl
 	done
    
     else 
@@ -228,7 +229,7 @@ elif [[ "$1" == "--exec_c2801" ]]; then
     
 elif [[ "$1" == "--exec_c2811VE" ]]; then
     chave="$chave_cisco_2811ve"
-    model="C2811VE"
+    model="C2801"
     func_exec_all "$2"
     exit $?    
     

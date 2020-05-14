@@ -17,7 +17,7 @@
 
 To check the options for each equipment use the tool help with -h, --help
 
-In the expect file we must declare the commands that will be executed on the hosts, following the example model cisco-bkp.tcl as it is in the repository.
+In the expect file we must declare the commands that will be executed on the hosts, following the example model cisco_bkp.tcl as it is in the repository.
 
 
 * The batch_key_bkp.sh tool can be used to back up settings for groups of hosts defined in /etc/hosts.
