@@ -1,12 +1,5 @@
-
-
-
 #!/usr/bin/env python3
 # coding:UTF-8
-# Author : Tiago Eduardo Zacarias
-# Version: 1.0.0
-# Date: 03-05-2020
-# License: GPLv3
 
 # Boolean key variables options: False/True | Disabled/Enabled
 

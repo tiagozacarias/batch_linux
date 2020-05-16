@@ -1,24 +1,20 @@
 #!/usr/bin/env python3
 # coding=UTF-8
-# Author : Tiago Eduardo Zacarias
-# Version: 1.0.0
-# Date: 03-05-2020
-# License: GPLv3
 import sys
 import time
 import os
 import subprocess
 
 
-def func_iterate_read_hosts(file_in,model):
+def func_iterate_read_hosts(file_out):
 
-    with open((file_in), "r") as file_i:
-        data = file_i.readlines()
+    with open((file_out), "w") as file_o:
+        data = file_o.readlines()
 
         for lines in data:
             lines = lines.strip()
             print(lines)
-            # time.sleep(1)
+             #time.sleep(1)
 
 
 def func_iterate_read_hostss(file_in):
