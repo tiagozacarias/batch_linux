@@ -35,9 +35,9 @@ def version():
 
 
 def main(key_model, hosts_model, file_cmd):
-
+   
     try:
-
+        # Test if directory tmp exist
         test_file_cmd_exist = [f"test -e {file_cmd}"]
         subprocess.run(test_file_cmd_exist, shell=True, check=True)
 

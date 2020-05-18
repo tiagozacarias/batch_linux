@@ -17,21 +17,22 @@ def run_expect(hosts, file_cmd):
         with open(file_cmd, "r", encoding="utf-8") as file_in:
             cmd = file_in.readlines()
 
-        create_dir_tmp = ["test -d tmp || mkdir tmp"]
-        subprocess.run(create_dir_tmp, shell=True)
-        sys.stdout = open(f"tmp/strace.txt", "a", encoding="utf-8")
+            create_dir_tmp = ["test -d tmp || mkdir tmp"]
+            subprocess.run(create_dir_tmp, shell=True)
+            sys.stdout = open(f"tmp/strace.txt", "a", encoding="utf-8")
 
-        child = pexpect.spawn(f"ping -c4 {hosts}")
-        child.logfile = sys.stdout.buffer
-        expect = child.expect(["icmp_seq=2", "icmp_seq=4"])
+            child = pexpect.spawn(f"ping -c3 {hosts}")
+            child.logfile = sys.stdout.buffer
+            expect = child.expect(["ttl="])
 
-        if expect == 0 or expect == 1:
+        if expect == 0:
 
-            child = pexpect.spawn(f"telnet {hosts}")
+            child = pexpect.spawn(
+                f"telnet {hosts}", echo=True, timeout=1000, maxread=800000)
             child.logfile = sys.stdout.buffer
 
         expect = child.expect(
-            ["No route to host", "Connection refused", "Username|username|user|User"])
+            ["No route to host", "Connection refused", "Username:|username:|user:|User:|Login:|login:"])
 
         if expect == 0:
 
@@ -40,26 +41,27 @@ def run_expect(hosts, file_cmd):
         elif expect == 1:
 
             child = pexpect.spawn(
-                f'ssh -o StrictHostKeyChecking=no {username}@{hosts}')
+                f'ssh -o StrictHostKeyChecking=no {username}@{hosts}', echo=True, timeout=1000, maxread=800000)
             child.logfile = sys.stdout.buffer
 
         elif expect == 2:
 
-            child.sendline(f"{username}\r")
+            child.send(f"{username}\r")
             child.logfile = sys.stdout.buffer
 
-        expect = child.expect(["Password|password"])
+        expect = child.expect(["Password:|password:"])
 
         if expect == 0:
 
-            child.sendline(f"{password}\r")
+            child.send(f"{password}\r")
             child.logfile = sys.stdout.buffer
 
-        expect = child.expect(["Permission denied on host|invalid", "#"])
+        expect = child.expect(
+            ["Permission denied on host|invalid|failed", "#"])
 
         if expect == 0:
 
-            child.kill(0)
+            child.exitstatus(1)
             child.logfile = sys.stdout.buffer
 
         elif expect == 1:
@@ -67,8 +69,9 @@ def run_expect(hosts, file_cmd):
             child.logfile = sys.stdout.buffer
 
         for cmd_ite in cmd:
-            child.send(f"{cmd_ite}\r")
-            child.expect("([a-z]|[A-Z]|[0-9])#$", timeout=1000)
+
+            child.sendline(f"{cmd_ite}")
+            child.expect("(^[A-Z]|[a-z]).*#", timeout=1000)
 
     except:
         pass
