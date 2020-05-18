@@ -12,11 +12,13 @@ password = os.environ["PASSWORD_EXP"]
 
 
 def run_expect(hosts, file_cmd):
+
     try:
 
         with open(file_cmd, "r", encoding="utf-8") as file_in:
             cmd = file_in.readlines()
-
+           
+            # Teste if directory tmp exist
             create_dir_tmp = ["test -d tmp || mkdir tmp"]
             subprocess.run(create_dir_tmp, shell=True)
             sys.stdout = open(f"tmp/strace.txt", "a", encoding="utf-8")
