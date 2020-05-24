@@ -219,7 +219,7 @@ elif [[ "$1" == "--exec_c2801" ]]; then
     
 elif [[ "$1" == "--exec_c2811VE" ]]; then
     chave="$chave_cisco_2811ve"
-    model="C2801"
+    model="C2811VE"
     echo "" > ./inventario.txt
     func_exec_inventario "$2"
     exit $?    

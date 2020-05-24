@@ -2,7 +2,7 @@
 # coding=UTF-8
 # Author : Tiago Eduardo Zacarias
 # Version: 1.0.0
-# Date: 15-05-2020
+# Date: 24-05-2020
 # License: GPLv3
 from modules import mod_read_file as iterate_file
 from modules import mod_vars_keys as keys
@@ -13,6 +13,9 @@ import re
 import sys
 import os
 import subprocess
+from multiprocessing import Process
+import threading
+import psutil
 
 # Python Version
 print(sys.version_info)
@@ -29,13 +32,19 @@ year = now.strftime("%Y")
 
 # Functions
 
+
 def version():
 
     print("Batch_Linux 1.0.0")
 
 
+def loop_expect(hosts_model, file_cmd):
+    
+    expect.run_expect(hosts_model, file_cmd)
+    
+
 def main(key_model, hosts_model, file_cmd):
-   
+
     try:
         # Test if file cmd exist
         test_file_cmd_exist = [f"test -e {file_cmd}"]
@@ -50,10 +59,37 @@ def main(key_model, hosts_model, file_cmd):
 
     if key_model == bool(True):
 
-        for hosts in (hosts_model):
+        # MultiProcessing
+        class TaskProxy(threading.Thread):
+           
+            
+            def __init__(self):
+                super(TaskProxy, self).__init__()
 
-            expect.run_expect(hosts, file_cmd)
+            def run(self):
+                  
+                p = Process(target=loop_expect,args=(hosts_model,file_cmd))
+                
+                # cpu_affinity set sigle core | 0 and mutiples cores | 0, 1, 2, 3
+                ps = psutil.Process()
+                ps.cpu_affinity([0])
+                
+                p.start()
+                pid=p.pid
+                print(f"Process child to {hosts_model} Initialized | Pid: {pid}")
+                p.join()
 
+        def task_handler(hosts_model,file_cmd):
+            t = TaskProxy()
+            #t.daemon = True
+            t.start()
+            return
+      
+            
+        for hosts_model in hosts_model:
+            task_handler(hosts_model,file_cmd)
+        
+        
     else:
 
         print(
@@ -341,7 +377,7 @@ def switch():
 
 # Exec Switch
 if __name__ == "__main__":
-    
+
     try:
 
         if len(sys.argv) == 1:

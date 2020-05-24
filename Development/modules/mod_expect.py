@@ -18,7 +18,7 @@ def run_expect(hosts, file_cmd):
         with open(file_cmd, "r", encoding="utf-8") as file_in:
             cmd = file_in.readlines()
            
-            # Teste if directory tmp exist
+            # Test if directory tmp exist
             create_dir_tmp = ["test -d tmp || mkdir tmp"]
             subprocess.run(create_dir_tmp, shell=True)
             sys.stdout = open(f"tmp/strace.txt", "a", encoding="utf-8")
@@ -38,7 +38,7 @@ def run_expect(hosts, file_cmd):
 
         if expect == 0:
 
-            child.kill(0)
+            child.exitstatus(1)
 
         elif expect == 1:
 
@@ -59,7 +59,7 @@ def run_expect(hosts, file_cmd):
             child.logfile = sys.stdout.buffer
 
         expect = child.expect(
-            ["Permission denied on host|invalid|failed", "#"])
+            ["Permission denied|invalid|failed", "#"])
 
         if expect == 0:
 
