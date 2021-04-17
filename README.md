@@ -1,4 +1,4 @@
-# Tools for Programmability and Automation in Network Operations
+# Tools for Automation and Programmability in Network Operations
 
 
 * These tools aim to automate the execution of commands in a sequential and massive way in network operations, based on the shell script and expect (Tcl).
@@ -6,13 +6,25 @@
 * The idea of developing these tools is in the style of Ansible and HPIMC operations.
 
 
+
+# TODO
+
+* In the process of developing three more modules in python as follows:
+
+			 
+			 - mod_backup.py  ==> Module for backup
+			 - mod_inventory.py ==> Module for Inventory
+			 - mod_programability.py ==> Modulo for Programability
+		
+
+
 # Getting Started
 
 
-* The batch_key.sh tool can be used to perform interactive inserts on groups of hosts defined in /etc/hosts.
+* The batch_key.py tool can be used to perform interactive inserts on groups of hosts defined in module mod_hosts.py
 
 
-			$ ./batch_key.sh --exec_hosts_all arquivo_lote.tcl
+		- $ python3 batch_key.py --exec_hosts_all arquivo_lote.tcl
 
 
 To check the options for each equipment use the tool help with -h, --help
@@ -20,39 +32,15 @@ To check the options for each equipment use the tool help with -h, --help
 In the expect file we must declare the commands that will be executed on the hosts, following the example model cisco_bkp.tcl as it is in the repository.
 
 
-* The batch_key_bkp.sh tool can be used to back up settings for groups of hosts defined in /etc/hosts.
+* You must include the host groups in the mod_hosts.py file, following the examples below:
 
-
-			$ ./batch_key_bkp.sh backup_cisco
-	      	 
-	
-
-The default backup directory and ~/backups
-
-
-* The batch_key_inventory.sh Tool can be used to obtain inventory of network equipment.
-
-
-For the time being the inventory is only supported on equipments I cisco the idea and extend it to other manufacturers.
-
-			
-			$ ./batch_key_inventory.sh --exec_c2960 cisco_inventory.tcl
-
-
-* You must include the host groups in the /etc/hosts file, following the examples below:
-
-
-			# BEGIN_ALL_CISCO
-			# BEGIN_C2950
-			10.15.124.134 BHZ-SW-01
-			10.15.124.136 BHZ-SW-02
-			# END_C2950
-
-			# BEGIN_C2960
-			10.15.124.137 BHZ-SW-03
-			10.15.124.138 BHZ-SW-04
-			# END_C2960
-			# END_ALL_CISCO
+			EXEMPLE = [
+				"10.20.20.87",
+				"10.2.20.50",
+				"10.2.20.51",
+				"10.217.20.34",
+				"10.217.0.20"
+				]
 
 The structure of the hosts file is defined in a way that allows the tool to limit the search by creating groups of hosts.
 
@@ -61,8 +49,8 @@ The structure of the hosts file is defined in a way that allows the tool to limi
 
 
 		
-			export USERNAME_EXP = "username"
-			export PASSWORD_EXP = "password"
+		      -	export USERNAME_EXP = "username"
+		      - export PASSWORD_EXP = "password"
 
 
 
@@ -73,27 +61,34 @@ The structure of the hosts file is defined in a way that allows the tool to limi
 
 
 
-# Dependency
 
-* For the execution of the tools, we have expect as a dependency and installation is necessary in most cases.
-
-
-		Installation via Snap:
-
-			# snap install expect
-	
-		Installation on RedHat systems:
 		
-			# dnf install expect
-			# yum install expect
-		
-		Installation on Debian systems:
+			 
+# Requeriments base
+			 - For the execution of the tools, we have python3.6 as a requeriments and installation is necessary in most cases. 
+			 - Minimal python3.6
+			 
+			 
 
-			# apt install expect
-		
-		Installation on FreeBSD systems:
+# Python3 packages requeriments
 
-			# pkg install expect
+			 - astroid==2.4.0
+			 - autopep8==1.5.2
+			 - filelock==3.0.12
+			 - isort==4.3.21
+			 - lazy-object-proxy==1.4.3
+			 - mccabe==0.6.1
+			 - pexpect==4.8.0
+			 - psutil==5.7.0
+			 - ptyprocess==0.6.0
+			 - pycodestyle==2.5.0
+			 - pylint==2.5.0
+			 - pysed==0.7.8
+			 - six==1.14.0
+			 - toml==0.10.0
+			 - typed-ast==1.4.1
+			 - wrapt==1.12.1
+
 
  
 # Comment
