@@ -7,7 +7,7 @@
 
 # Imports
 
-# cpu_affinity set sigle core [0] or mutiples cores range [0, 1, 2, 3].
+# cpu_affinity set sigle core [0] or multiples cores range [0, 1, 2, 3].
 # cpu_affinity set above 2 cores was observed high memory consumption. 
 
 def cpu_affinity():
