@@ -49,8 +49,8 @@ The structure of the hosts file is defined in a way that allows the tool to limi
 
 
 		
-		      -	export USERNAME_EXP = "username"
-		      - export PASSWORD_EXP = "password"
+			  - export USERNAME_EXP = "username"
+			  - export PASSWORD_EXP = "password"
 
 
 
