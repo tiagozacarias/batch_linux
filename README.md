@@ -1,7 +1,7 @@
 # Tools for Automation and Programmability in Network Operations
 
 
-* These tools aim to automate the execution of commands in a sequential and massive way in network operations, based on the shell script and expect (Tcl).
+* These tools aim to automate the execution of commands in a parallel/sequential and massive way in network operations, based on the python3, shell script and expect (Tcl).
 
 * The idea of developing these tools is in the style of Ansible and HPIMC operations.
 
