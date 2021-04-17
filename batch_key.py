@@ -36,7 +36,7 @@ year = now.strftime("%Y")
 
 def version():
 
-  print("Batch_Linux 1.0.0")
+  print("Batch_Linux 1.1.0")
 
 
 def loop_expect(hosts_model, file_cmd):
