@@ -64,6 +64,8 @@ Options for exec:
 
 	--exec_c6509      lot_file.tcl     Performs commands on all equipment in the cisco 6509
 
+	--exec_c9407      lot_file.tcl     Performs commands on all equipment in the cisco 9407
+
 	--exec_c6513      lot_file.tcl     Performs commands on all equipment in the cisco 6513
 	
 	--exec_cie-3000   lot_file.tcl     Performs commands on all equipment in the cisco ie-3000
