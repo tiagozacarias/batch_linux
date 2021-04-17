@@ -14,7 +14,7 @@
 			 
 			 - mod_backup.py  ==> Module for backup
 			 - mod_inventory.py ==> Module for Inventory
-			 - mod_programability.py ==> Modulo for Programability
+			 - mod_programability.py ==> Module for Programability
 		
 
 
@@ -24,7 +24,7 @@
 * The batch_key.py tool can be used to perform interactive inserts on groups of hosts defined in module mod_hosts.py
 
 
-		- $ python3 batch_key.py --exec_hosts_all arquivo_lote.tcl
+		- $ python3 batch_key.py --exec_hosts_all file_lote.tcl
 
 
 To check the options for each equipment use the tool help with -h, --help
