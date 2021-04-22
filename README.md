@@ -93,5 +93,4 @@ The structure of the hosts file is defined in a way that allows the tool to limi
  
 # Comment
 
-
 * Before executing these tools make sure that the desired impact on the network infrastructure has been mapped, perform with caution.
