@@ -14,7 +14,7 @@
 			 
 			 - mod_backup.py  ==> Module for backup
 			 - mod_inventory.py ==> Module for Inventory
-			 - mod_programability.py ==> Module for Programability
+			 - mod_programmability.py ==> Module for Programmability
 		
 
 
