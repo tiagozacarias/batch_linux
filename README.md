@@ -34,7 +34,7 @@ In the expect file we must declare the commands that will be executed on the hos
 
 * You must include the host groups in the mod_hosts.py file, following the examples below:
 
-			EXEMPLE = [
+			EXAMPLE = [
 				"10.20.20.87",
 				"10.2.20.50",
 				"10.2.20.51",
