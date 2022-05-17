@@ -1,0 +1,1 @@
+/usr/bin/ping: usage error: Endereço de destino requerido

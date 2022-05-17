@@ -16,6 +16,9 @@ from pathlib import Path
 from multiprocessing import Process
 import threading
 import psutil
+import pdb
+
+
 
 # Python Version
 # print(sys.version_info)
@@ -55,7 +58,7 @@ def main(key_model, hosts_model, file_cmd):
 
           # Class MultiProcessing
           class TaskProxy(threading.Thread):
-
+           
               def __init__(self):
                   super(TaskProxy, self).__init__()
 
@@ -309,6 +312,18 @@ def switch():
       hosts_model = hosts.CASR903
       file_cmd = sys.argv[2]
       main(key_model, hosts_model, file_cmd)
+    
+  elif sys.argv[1] == "--exec_casr1001":
+      key_model = "key_cisco_asr_1001"
+      hosts_model = hosts.CASR1001
+      file_cmd = sys.argv[2]
+      main(key_model, hosts_model, file_cmd)
+        
+  elif sys.argv[1] == "--exec_casr9901":
+      key_model = "key_cisco_asr_9901"
+      hosts_model = hosts.CASR9901
+      file_cmd = sys.argv[2]
+      main(key_model, hosts_model, file_cmd)
 
   elif sys.argv[1] == "--exec_ccgr-2010":
       key_model = "key_cisco_cgr_2010"
@@ -331,6 +346,12 @@ def switch():
   elif sys.argv[1] == "--exec_cie-3000":
       key_model = "key_cisco_ie_3000"
       hosts_model = hosts.CIE3000
+      file_cmd = sys.argv[2]
+      main(key_model, hosts_model, file_cmd)
+
+  elif sys.argv[1] == "--exec_cie-2000":
+      key_model = "key_cisco_ie_2000"
+      hosts_model = hosts.CIE2000
       file_cmd = sys.argv[2]
       main(key_model, hosts_model, file_cmd)
 
@@ -368,6 +389,18 @@ def switch():
       key_model = "key_teste"
       file_cmd = sys.argv[2]
       hosts_model = hosts.TESTE
+      main(key_model, hosts_model, file_cmd)
+
+  elif sys.argv[1] == "--exec_c1841":
+      key_model = "key_cisco_1841"
+      hosts_model = hosts.C1841
+      file_cmd = sys.argv[2]
+      main(key_model, hosts_model, file_cmd)
+
+  elif sys.argv[1] == "--exec_cncs5501":
+      key_model = "key_cisco_ncs5501"
+      hosts_model = hosts.CNCS5501
+      file_cmd = sys.argv[2]
       main(key_model, hosts_model, file_cmd)
 
   elif sys.argv[1] == "--exec_all_cisco":

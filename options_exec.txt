@@ -68,9 +68,19 @@ Options for exec:
 
 	--exec_c6513      lot_file.tcl     Performs commands on all equipment in the cisco 6513
 	
-	--exec_cie-3000   lot_file.tcl     Performs commands on all equipment in the cisco ie-3000
+	--exec_cie-2000   lot_file.tcl     Performs commands on all equipment in the cisco ie-2000
 
+    --exec_cie-3000   lot_file.tcl     Performs commands on all equipment in the cisco ie-3000
+	
 	--exec_cmc4810    lot_file.tcl     Performs commands on all equipment in the cisco mc4810
+
+	--exec_c1841      lot_file.tcl     Performs commands on all equipment in the cisco 1841
+
+	--exec_cncs5501   lot_file.tcl     Performs commands on all equipment in the cisco NCS 5501
+
+	--exec_casr1001   lot_file.tcl     Performs commands on all equipment in the cisco ASR1001
+
+    --exec_casr9901   lot_file.tcl     Performs commands on all equipment in the cisco ASR1001
 
 	--exec_cnexus     lot_file.tcl     Performs commands on all equipment in the cisco nexus
 
