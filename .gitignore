@@ -1,5 +1,4 @@
 *.log
-tmp
 Development/*.pyc
 Development/modules/*.pyc
 Development/__pycache__
