@@ -1,0 +1,6 @@
+2019-11-20 (Tiago Zacarias): Change in version 1.1.0 | including function
+2020-02-19 (Tiago Zacarias): Change in version 1.2.0 | moved hosts files to /etc/hosts
+2020-03-22 (Tiago Zacarias): Change in version 1.2.1 | Restructured
+2020-03-25 (Tiago Zacarias): Change in version 1.3.0 | Restructured - Reduced amount of loops
+2021-01-09 (Tiago Zacarias): Change script to language python3
+2025-04-17 (Tiago Zacarias): Change in version 1.4.0 | Change Module Automation from expect to netmiko
