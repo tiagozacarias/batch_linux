@@ -45,8 +45,7 @@ In the expect file we must declare the commands that will be executed on the hos
 The structure of the hosts file is defined in a way that allows the tool to limit the search by creating groups of hosts.
 
 
-* Each expect file contains the user and password environment variables that must be included in the ~/.bashrc of the user who will run the tools, it is in these variables that the expect script will use to authenticate into the host groups to perform the operations.
-
+* Each netmiko file contains the user and password environment variables that must be included in the ~/.bashrc of the user who will run the tools, it is in these variables that the netmiko module will use to authenticate into the host groups to perform the operations.
 
 		
 			  - export USERNAME_NETMIKO = "username"
