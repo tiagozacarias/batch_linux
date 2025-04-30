@@ -2,7 +2,7 @@
 # coding=UTF-8
 # Author: Tiago Eduardo Zacarias
 # Version: 1.4.0
-# Date: 17-04-2025
+# Date: 29-04-2025
 # License: GPLv3
 
 import threading
@@ -25,17 +25,13 @@ device_list = []
 # Multithreads
 threads = []
 
-# Device Type
-device_telnet = "cisco_ios_telnet"
-device_ssh = "cisco_ios_ssh"
-
 
 class process_connection:
 
     def __init__(self) -> None:
         pass
 
-    def test_connection(ip):
+    def test_connection(ip, device_telnet, device_ssh):
 
         print(
             f"Validating Connection in: {ip}: \033[0;36m[ Initialized ]\033[0m  ")
@@ -85,22 +81,31 @@ class process_fetch:
     def __init__(self) -> None:
         pass
 
-    def connect_and_fetch(cmd, router):
+    def connect_and_fetch(cmd, send_cmd, router):
         try:
 
             connection = ConnectHandler(**router)
 
-            if cmd == "show run":
+            if cmd == None:
 
-                # Method for Backup
-                output = connection.send_command("show run", read_timeout=6000)
+                output = connection.send_command(send_cmd, read_timeout=120)
+
+            elif cmd == "show run":
+
+                # Method for Backup cisco
+                output = connection.send_command("show run", read_timeout=120)
+
+            elif cmd == "display cur":
+
+                # Method for Backup Huawei
+                output = connection.send_command(
+                    "display cur", read_timeout=120)
 
             elif cmd == cmd:
 
                 # Method for automation
                 output = connection.send_config_from_file(
-                    cmd, read_timeout=6000)
-
+                    cmd, read_timeout=120)
 
             # Open File
             with open(f"tmp/{router['ip']}.txt", "w") as f:
@@ -110,7 +115,6 @@ class process_fetch:
                 f.close()
 
             connection.disconnect()
-     
 
         except AuthenticationException:
 
@@ -119,7 +123,6 @@ class process_fetch:
                 print(
                     f"Authentication failed, please verify your credentials on: {router['ip']}", file=f)
                 f.close()
-
 
         except NetMikoTimeoutException:
 
@@ -137,14 +140,13 @@ class process_fetch:
                     f"Value Erro", file=f)
                 f.close()
 
-    def multithread(file_cmd):
+    def multithread(file_cmd, send_cmd):
 
         for router in device_list:
             th = threading.Thread(
-                target=process_fetch.connect_and_fetch, args=(file_cmd, router,))
+                target=process_fetch.connect_and_fetch, args=(file_cmd, send_cmd, router,))
             th.start()
             threads.append(th)
 
         for th in threads:
             th.join()
-
