@@ -5,13 +5,14 @@
 # Date: 29-04-2025
 # License: GPLv3
 
-# Imports
-from mod_hosts import mod_hosts as hosts
-from mod_netmiko import mod_netmiko as mod_netmiko
+# EXTERNAL LIBS
 import datetime
 import sys
 from pathlib import Path
 
+# CUSTOM LIBS
+from mod_hosts import mod_hosts as hosts
+from mod_netmiko import mod_netmiko as mod_netmiko
 
 # Python Version
 # print(sys.version_info)
@@ -76,7 +77,7 @@ Usage: python3 {(sys.argv[0])} [OPTION]
   """)
 
 
-class process_netmiko():
+class ProcessNetmiko():
 
     def __init__(self) -> None:
         pass
@@ -86,14 +87,14 @@ class process_netmiko():
         # Test Connection
         for ip in hosts_model:
 
-            mod_netmiko.process_connection.test_connection(
+            mod_netmiko.ProcessConnection.test_connection(
                 ip, device_type_telnet, device_type_ssh)
 
         print(
             f"Validating Connection: \033[0;33m[ Finished ]\033[0m")
 
         # Fetch config
-        mod_netmiko.process_fetch.multithread(cmd, send_cmd)
+        mod_netmiko.ProcessFetch.multithread(cmd, send_cmd)
 
         print(
             f"Process configuration to devices: \033[0;33m[ Finished ]\033[0m")
@@ -141,7 +142,7 @@ def switch():
 
             try:
 
-                process_netmiko.loop_netmiko(
+                ProcessNetmiko.loop_netmiko(
                     hosts_model, cmd, send_cmd, device_telnet, device_ssh)
 
             except UnboundLocalError:
@@ -174,7 +175,7 @@ def switch():
 
         try:
 
-            process_netmiko.loop_netmiko(
+            ProcessNetmiko.loop_netmiko(
                 hosts_model, cmd, send_cmd, device_telnet, device_ssh)
 
         except UnboundLocalError:
@@ -203,7 +204,7 @@ def switch():
 
         try:
 
-            process_netmiko.loop_netmiko(
+            ProcessNetmiko.loop_netmiko(
                 hosts_model, cmd, send_cmd, device_telnet, device_ssh)
 
         except UnboundLocalError:

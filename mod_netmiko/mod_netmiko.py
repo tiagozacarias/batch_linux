@@ -5,6 +5,7 @@
 # Date: 29-04-2025
 # License: GPLv3
 
+# EXTERNAL LIBS
 import threading
 from netmiko import ConnectHandler
 import socket
@@ -26,7 +27,7 @@ device_list = []
 threads = []
 
 
-class process_connection:
+class ProcessConnection:
 
     def __init__(self) -> None:
         pass
@@ -76,7 +77,7 @@ class process_connection:
                     f.close()
 
 
-class process_fetch:
+class ProcessFetch:
 
     def __init__(self) -> None:
         pass
@@ -144,7 +145,7 @@ class process_fetch:
 
         for router in device_list:
             th = threading.Thread(
-                target=process_fetch.connect_and_fetch, args=(file_cmd, send_cmd, router,))
+                target=ProcessFetch.connect_and_fetch, args=(file_cmd, send_cmd, router,))
             th.start()
             threads.append(th)
 
