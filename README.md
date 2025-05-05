@@ -1,13 +1,12 @@
-Tools for Automation and Programmability in Network Operations
+# Tools for Automation and Programmability in Network Operations
 
 
-* These tools aim to automate the execution of commands in a parallel and massive way in network operations, based on the python3.
-
-* The idea of developing these tools is in the style of Ansible and HPIMC operations.
-
+These tools aim to automate the execution of commands in a parallel and massive way in network operations, based on the python3.
+The idea of developing these tools is in the style of Ansible and HPIMC operations.
 
 
-TODO
+
+TODO:
 
 * In the process of developing three more modules in python as follows:
 
@@ -18,7 +17,7 @@ TODO
 		
 
 
-Getting Started
+Getting Started:
 
 
 * The batch_linux.py tool can be used to perform interactive inserts on groups of hosts defined in module mod_hosts.py.
@@ -76,19 +75,19 @@ The structure of the hosts file is defined in a way that allows the tool to limi
 
 		
 			 
-Requeriments base
+Requeriments base:
 
 			- Requer --> Python <4.0, >=3.9
 			 
 			 
 
-Python3 packages requeriments
+Python3 packages requeriments:
 
 			- netmiko==4.4.0
 			- paramiko==3.4.0
 
 
  
-Comment
+Comment:
 
 * Before executing these tools make sure that the desired impact on the network infrastructure has been mapped, perform with caution.
