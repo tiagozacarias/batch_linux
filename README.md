@@ -24,11 +24,9 @@
 * The batch_linux.py tool can be used to perform interactive inserts on groups of hosts defined in module mod_hosts.py.
 
 
-				python3 batch_linux.py --exec_automation lot.file.tcl cisco|huawei
-
-				python3 batch_linux.py --exec_backup cisco|huawei
-
-				python3 batch_linux.py --exec_send_cmd cisco|huawei "command"
+			- python3 batch_linux.py --exec_automation lot.file.tcl cisco|huawei
+			- python3 batch_linux.py --exec_backup cisco|huawei
+			- python3 batch_linux.py --exec_send_cmd cisco|huawei "command"
 
 
 
@@ -39,13 +37,22 @@ In the tcl file we must declare the commands that will be executed on the hosts,
 
 * You must include the host groups in the mod_hosts.py file, following the examples below:
 
-			EXAMPLE = [
+			EXAMPLE1 = [
 				"10.20.20.87",
 				"10.2.20.50",
 				"10.2.20.51",
 				"10.217.20.34",
 				"10.217.0.20"
 				]
+
+			EXAMPLE2 = [
+				"10.1.20.87",
+				"10.2.20.50",
+				"10.3.20.51",
+				"10.4.20.34",
+				"10.5.0.20"
+				]
+
 
 The structure of the hosts file is defined in a way that allows the tool to limit the search by creating groups of hosts.
 
@@ -71,7 +78,7 @@ The structure of the hosts file is defined in a way that allows the tool to limi
 			 
 # Requeriments base
 
-			 - Requer --> Python <4.0, >=3.9
+			- Requer --> Python <4.0, >=3.9
 			 
 			 
 
