@@ -68,7 +68,7 @@ The structure of the hosts file is defined in a way that allows the tool to limi
 * All operations will initially be performed preferably via telnet, if you are not able to use TELNET, you will try SSH.
 
 
-* This behavior of attempting to perform operations primarily by Telnet aims to guarantee compatibility with legacy devices, but it can be customized in expect to always give preference to SSH.
+* This behavior of attempting to perform operations primarily by Telnet aims to guarantee compatibility with legacy devices, but it can be customized in module netmiko to always give preference to SSH.
 
 
 
