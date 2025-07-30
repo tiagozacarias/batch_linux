@@ -2,7 +2,7 @@
 # coding=UTF-8
 # Author: Tiago Eduardo Zacarias
 # Version: 1.4.0
-# Date: 29-04-2025
+# Date: 29-07-2025
 # License: GPLv3
 
 # EXTERNAL LIBS
@@ -57,11 +57,11 @@ Usage: python3 {(sys.argv[0])} [OPTION]
 
 [Examples]:
         
-    python3 batch_linux.py --exec_automation lot.file.tcl cisco|huawei
+    python3 batch_linux.py --exec_automation lot.file.tcl cisco|cisco_asa|huawei
 
-    python3 batch_linux.py --exec_backup cisco|huawei
+    python3 batch_linux.py --exec_backup cisco|cisco_asa|huawei
 
-    python3 batch_linux.py --exec_send_cmd cisco|huawei "command"
+    python3 batch_linux.py --exec_send_cmd cisco|cisco_asa|huawei "command"
     
 
 
@@ -70,6 +70,8 @@ Usage: python3 {(sys.argv[0])} [OPTION]
     cisco_ios_telnet --> Cisco Telnet
     
     cisco_ios_ssh --> Cisco SSH
+
+    cisco_asa --> Cisco ASA
     
     huawei --> Huawei
 
@@ -133,6 +135,13 @@ def switch():
                 device_telnet = "cisco_ios_telnet"
                 device_ssh = "cisco_ios_ssh"
 
+            elif sys.argv[2] == "cisco_asa":
+
+                hosts_model = hosts.CISCO
+                send_cmd = None
+                device_telnet = "cisco_asa"
+                device_ssh = "cisco_asa"
+
             elif sys.argv[2] == "huawei":
 
                 hosts_model = hosts.HUAWEI
@@ -165,6 +174,14 @@ def switch():
             device_telnet = "cisco_ios_telnet"
             device_ssh = "cisco_ios_ssh"
 
+        elif sys.argv[2] == "cisco_asa":
+
+            hosts_model = hosts.CISCO
+            cmd = "show run"
+            send_cmd = None
+            device_telnet = "cisco_asa"
+            device_ssh = "cisco_asa"
+
         elif sys.argv[2] == "huawei":
 
             hosts_model = hosts.HUAWEI
@@ -193,6 +210,14 @@ def switch():
             cmd = None
             device_telnet = "cisco_ios_telnet"
             device_ssh = "cisco_ios_ssh"
+
+        elif sys.argv[2] == "cisco_asa":
+
+            hosts_model = hosts.CISCO
+            send_cmd = sys.argv[3]
+            cmd = None
+            device_telnet = "cisco_asa"
+            device_ssh = "cisco_asa"
 
         elif sys.argv[2] == "huawei":
 
