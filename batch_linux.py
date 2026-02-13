@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # coding=UTF-8
 # Author: Tiago Eduardo Zacarias
-# Version: 1.4.0
-# Date: 29-07-2025
+# Version: 1.4.1
+# Date: 12-02-2026
 # License: GPLv3
 
 # EXTERNAL LIBS
@@ -32,7 +32,7 @@ year = now.strftime("%Y")
 
 def version():
 
-    print("\033[0;36m[ Batch_Linux 1.4.0 - Language: Python3 ]\033[0m")
+    print("\033[0;36m[ Batch_Linux 1.4.1 - Language: Python3 ]\033[0m")
 
 
 def menu_help():
@@ -56,24 +56,26 @@ Usage: python3 {(sys.argv[0])} [OPTION]
 
 
 [Examples]:
-        
-    python3 batch_linux.py --exec_automation lot.file.tcl cisco|cisco_asa|huawei
+
+    python3 batch_linux.py --exec_automation  cisco|cisco_asa|huawei|linux lot.file.tcl
 
     python3 batch_linux.py --exec_backup cisco|cisco_asa|huawei
 
-    python3 batch_linux.py --exec_send_cmd cisco|cisco_asa|huawei "command"
-    
+    python3 batch_linux.py --exec_send_cmd cisco|cisco_asa|huawei|linux "command"
+
 
 
 [Device Type]
 
     cisco_ios_telnet --> Cisco Telnet
-    
+
     cisco_ios_ssh --> Cisco SSH
 
     cisco_asa --> Cisco ASA
-    
+
     huawei --> Huawei
+
+    linux --> linux
 
 
   """)
@@ -148,6 +150,13 @@ def switch():
                 send_cmd = None
                 device_telnet = "huawei"
                 device_ssh = "huawei"
+
+            elif sys.argv[2] == "linux":
+
+                hosts_model = hosts.LINUX
+                send_cmd = None
+                device_telnet = "linux"
+                device_ssh = "linux"
 
             try:
 
@@ -226,6 +235,14 @@ def switch():
             cmd = None
             device_telnet = "huawei"
             device_ssh = "huawei"
+
+        elif sys.argv[2] == "linux":
+
+            hosts_model = hosts.LINUX
+            send_cmd = sys.argv[3]
+            cmd = None
+            device_telnet = "linux"
+            device_ssh = "linux"
 
         try:
 
