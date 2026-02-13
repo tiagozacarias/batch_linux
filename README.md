@@ -23,9 +23,9 @@ Getting Started:
 * The batch_linux.py tool can be used to perform interactive inserts on groups of hosts defined in module mod_hosts.py.
 
 
-			- python3 batch_linux.py --exec_automation lot.file.tcl cisco|cisco_asa|huawei
+			- python3 batch_linux.py --exec_automation lot.file.tcl cisco|cisco_asa|huawei|linux
 			- python3 batch_linux.py --exec_backup cisco|cisco_asa|huawei
-			- python3 batch_linux.py --exec_send_cmd cisco|cisco_asa|huawei "command"
+			- python3 batch_linux.py --exec_send_cmd cisco|cisco_asa|huawei|linux "command"
 
 
 
