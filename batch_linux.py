@@ -75,7 +75,7 @@ Usage: python3 {(sys.argv[0])} [OPTION]
 
     huawei --> Huawei
 
-    linux --> linux
+    linux --> Linux
 
 
   """)

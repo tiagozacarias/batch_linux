@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # coding=UTF-8
 # Author: Tiago Eduardo Zacarias
-# Version: 1.4.0
-# Date: 29-04-2025
+# Version: 1.5.1
+# Date: 12-02-2026
 # License: GPLv3
 
 # EXTERNAL LIBS
@@ -12,7 +12,8 @@ import socket
 import os
 from netmiko.exceptions import NetMikoTimeoutException
 from netmiko.exceptions import AuthenticationException
-from netmiko.exceptions import SSHException
+import logging
+
 
 # Vars
 # Get Login
@@ -25,6 +26,10 @@ device_list = []
 
 # Multithreads
 threads = []
+
+# Debug Channel 
+logging.basicConfig(filename='debug.log', level=logging.DEBUG)
+logger = logging.getLogger("netmiko")
 
 
 class ProcessConnection:
@@ -50,7 +55,7 @@ class ProcessConnection:
             device_list.append({"device_type": device_telnet, "ip": ip,
                                 "username": username, "password": password,
                                 "timeout": 50, "fast_cli": False, "global_delay_factor": 2,
-                                "session_log": "log.txt", "session_log_file_mode": "append"})
+                                "session_log": "session.log", "session_log_file_mode": "append"})
         else:
 
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -66,7 +71,7 @@ class ProcessConnection:
                 device_list.append({"device_type": device_ssh, "ip": ip,
                                     "username": username, "password": password,
                                     "timeout": 50, "fast_cli": False, "global_delay_factor": 2,
-                                    "session_log": "log.txt", "session_log_file_mode": "append"})
+                                    "session_log": "session.log", "session_log_file_mode": "append"})
 
             else:
 
@@ -74,7 +79,6 @@ class ProcessConnection:
 
                     print(
                         f"Unable to establish SSH or Telnet connection on: {ip}", file=f)
-                    f.close()
 
 
 class ProcessFetch:
@@ -89,31 +93,30 @@ class ProcessFetch:
 
             if cmd == None:
 
-                output = connection.send_command(send_cmd, read_timeout=120)
+                output = connection.send_command(send_cmd, read_timeout=2000)
 
             elif cmd == "show run":
 
                 # Method for Backup cisco
-                output = connection.send_command("show run", read_timeout=120)
+                output = connection.send_command(cmd, read_timeout=2000)
 
             elif cmd == "display cur":
 
                 # Method for Backup Huawei
                 output = connection.send_command(
-                    "display cur", read_timeout=120)
+                    cmd, read_timeout=2000)
 
             elif cmd == cmd:
 
                 # Method for automation
                 output = connection.send_config_from_file(
-                    cmd, read_timeout=120)
+                    cmd, read_timeout=2000)
 
             # Open File
             with open(f"tmp/{router['ip']}.txt", "w") as f:
 
                 print(
                     f"Configuration output for {router['ip']}:\n{output}", file=f)
-                f.close()
 
             connection.disconnect()
 
@@ -123,7 +126,6 @@ class ProcessFetch:
 
                 print(
                     f"Authentication failed, please verify your credentials on: {router['ip']}", file=f)
-                f.close()
 
         except NetMikoTimeoutException:
 
@@ -131,7 +133,6 @@ class ProcessFetch:
 
                 print(
                     f"Timeout on: {router['ip']}", file=f)
-                f.close()
 
         except ValueError:
 
@@ -139,7 +140,6 @@ class ProcessFetch:
 
                 print(
                     f"Value Erro", file=f)
-                f.close()
 
     def multithread(file_cmd, send_cmd):
 
